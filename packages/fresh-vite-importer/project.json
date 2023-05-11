@@ -1,0 +1,56 @@
+{
+  "name": "fresh-vite-importer",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "packages/fresh-vite-importer/",
+  "targets": {
+    "build": {
+      "executor": "@nx/deno:lint",
+      "options": {
+        "main": "packages/fresh-vite-importer/main.ts",
+        "denoConfig": "packages/fresh-vite-importer/deno.json",
+        "watch": false,
+        "outputFile": "dist/packages/fresh-vite-importer/main.js"
+      },
+      "dependsOn": [{
+        "projects": "vite-preact-lib",
+        "target": "build", 
+        "params": "ignore"
+      }]
+    },
+    "serve": {
+      "executor": "@nx/deno:run",
+      "options": {
+        "main": "packages/fresh-vite-importer/main.ts",
+        "denoConfig": "packages/fresh-vite-importer/deno.json",
+        "watch": true
+      },
+      "dependsOn": ["build"]
+    },
+    "dev": {
+      "executor": "@nx/deno:run",
+      "options": {
+        "main": "packages/fresh-vite-importer/dev.ts",
+        "denoConfig": "packages/fresh-vite-importer/deno.json",
+        "watch": true
+      },
+      "dependsOn": ["build"]
+    },
+    "test": {
+      "executor": "@nx/deno:test",
+      "outputs": ["coverage/packages/fresh-vite-importer"],
+      "options": {
+        "coverageDirectory": "coverage/packages/fresh-vite-importer",
+        "denoConfig": "packages/fresh-vite-importer/deno.json"
+      },
+      "dependsOn": ["build"]
+    },
+    "lint": {
+      "executor": "@nx/deno:lint",
+      "options": {
+        "denoConfig": "packages/fresh-vite-importer/deno.json"
+      }
+    }
+  },
+  "tags": []
+}
