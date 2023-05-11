@@ -1,0 +1,6 @@
+.header { 
+    font-size: 5em;
+    background: linear-gradient(#4F76BB, #783BAE);
+    background-clip: text;
+    color: transparent;
+}
